@@ -7,31 +7,36 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <script type="text/javascript">
+      "use strict";
       /* My JQuery goes here */
-      // function addTableRow(){
-      //   console.log($('#myForm').serialize());
-      //   console.log("f",firstName,"l",lastName,"e",emailAddr,"c",contactNum);
-      //   $('#myTable').append("<tr><td>firstName</td><td>lastName</td><td>emailAddr</td><td>contactNum</td></tr>");
-      // };
+      function addTableRow(){
+        var firstName = $('input.formP1').val();
+        var lastName = $('input.formP2').val();
+        var emailAddr = $('input.formP3').val();
+        var contactNum = $('input.formP4').val();
+        var newUser =  "<tr><td>"+firstName+"</td><td>"+lastName+"</td><td>"+emailAddr+"</td><td>"+contactNum+"</td></tr>";
+        // console.log($('#myForm').serialize());
+        console.log(firstName+" "+lastName+" "+emailAddr+" "+contactNum);
+        $('#myTable').append(newUser);
+        $("#myForm").each(function(){
+          this.reset();
+        });
+        return false;
+      };
 
       $(document).ready(function(){ /* initial page load */
 
         $('#myForm').submit(function(){ /* form submit action */
-          // console.log("f",firstName,"l",lastName,"e",emailAddr,"c",contactNum);
-          console.log($('#myForm').serialize());
-          $('#myTable').append("<tr><td>"+firstName+"</td><td>"+lastName+"</td><td>"+emailAddr+"</td><td>"+contactNum+"</td></tr>");
-          return false;
-          // addTableRow();
+          addTableRow();
         });
       });
     </script>
   </head>
 
   <body>
-<!--    <p>This is a Test Paragraph Element</p> -->
     <div id="wrapper">
       <div id="top">
-        <table>
+        <table id="myTable">
           <thead>
             <tr>
               <th>First Name</th>
@@ -40,7 +45,7 @@
               <th>Contact #</th>
             </tr>
           </thead>
-          <tbody id="myTable">
+          <tbody>
             <tr>
               <td>1</td>
               <td>2</td>
@@ -54,14 +59,14 @@
       <div id="bottom">
         <h1>Add User</h1>
         <hr>
-        <form id="myForm" method="post">
-          First Name:<input type="text" name="firstName" value="">
+        <form id="myForm">
+          First Name:<input class="formP1" type="text" name="firstName">
           <p></p>
-          Last Name:<input type="text" name="lastName" value="">
+          Last Name:<input class="formP2" type="text" name="lastName" value="">
           <p></p>
-          Email Address:<input type="text" name="emailAddr" value="">
+          Email Address:<input class="formP3" type="text" name="emailAddr" value="">
           <p></p>
-          Contact #:<input type="text" name="contactNum" value="">
+          Contact #:<input class="formP4" type="text" name="contactNum" value="">
           <p></p>
           <input type="submit" value="Add User">
         </form>
